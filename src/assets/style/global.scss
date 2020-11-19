@@ -1,0 +1,74 @@
+// Icon
+// @import "icon";
+
+html {
+    overflow: auto;
+}
+
+// Global
+.d-flex {
+    display: flex;
+    &.j-sb {
+        justify-content: space-between;
+    }
+
+    &.j-c {
+        justify-content: center;
+    }
+
+    &.a-c {
+        align-items: center;
+    }
+}
+
+.outline-none {
+    outline: none;
+}
+
+.home-intro {
+    width: 100%;
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+}
+
+.content-intro {
+    h1 {
+        margin: 0;
+        color: #fff;
+    }
+    padding: 20px;
+    width: 100%;
+    height: 500px;
+}
+
+.wrapper-card {
+    height: 500px;
+    width: 100%;
+}
+
+// Slick
+.slick-next {
+    right: 20px !important;
+
+    &::before {
+        font-size: 40px !important;
+    }
+}
+
+.slick-prev {
+    z-index: 100;
+    left: 0px !important;
+
+    &::before {
+        font-size: 40px !important;
+    }
+}
+
+.p-absolute {
+    position: absolute !important;
+    height: 100vh;
+    width: 100%;
+    z-index: -1;
+}
+

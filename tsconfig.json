@@ -1,0 +1,46 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "lib": [
+            "dom",
+            "es2017"
+        ],
+        // "allowJs": true,
+        // "checkJs": true,
+        "noImplicitAny": false,
+        "jsx": "react",
+        "strict": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "noEmit": true,
+        "skipLibCheck": true,
+        "declaration": true,
+        "types": [
+            "node"
+        ],
+        "typeRoots": [
+            "../node_modules/@types",
+            "src"
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "Assets/*": [
+                "src/assets/*"
+            ],
+            "Components/*": [
+                "src/components/*"
+            ],
+            "Pages/*": [
+                "src/pages/*"
+            ],
+        },
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
