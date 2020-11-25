@@ -26,6 +26,9 @@
         ],
         "baseUrl": ".",
         "paths": {
+            "Src/*": [
+                "src/*"
+            ],
             "Assets/*": [
                 "src/assets/*"
             ],

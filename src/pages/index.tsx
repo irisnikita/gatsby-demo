@@ -2,9 +2,12 @@
 import React, {useMemo} from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
+import Img from 'gatsby-image';
+import {Button, Icon} from 'vuisuper';
 
 // Components
 import Layout from 'Components/Layout/index';
+import {Post, WrapPost, Sidebar} from 'Src/templates/blog-post';
 
 import {graphql, Link} from 'gatsby';
 import SEO from 'Components/Seo';
@@ -28,8 +31,53 @@ const WrapperIntroduce = styled.div`
     width: 100%;
 `;
 
+const MainPost = styled(Post)`
+    text-align: center;
+    
+    h2 {
+        margin: 10px !important;
+    }
+
+    .post-description {
+        padding: 0px 30px;
+    }
+
+    .d-flex {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        i {
+            color: #08979c;
+        }
+    }
+`;
+
+const MainWrapPost = styled(WrapPost)`
+    margin-top: 15px;
+    justify-content: space-between;
+    flex-wrap: nowrap wrap;
+`;
+
+const PostInfo = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-size: 14px;
+    margin-bottom: 10px;
+
+    .avatar {
+        width: 24px;
+        height: 24px;
+        background-color: #36cfc9;
+        border-radius: 50%;
+    }
+
+`;
+
 const Card = styled.div`
-    background: #fff;
+    background: #000000;
     color: #fff;
     top: 0px;
     background-size: 450px;
@@ -74,6 +122,7 @@ const Card = styled.div`
 const Home: React.FC<IHome> = (props) => {
     // Props
     const {data} = props;
+
     const {site} = data;
 
     // Setting slick
@@ -128,6 +177,41 @@ const Home: React.FC<IHome> = (props) => {
                     </div>
                 </section>
             </WrapperIntroduce>
+            <MainWrapPost>
+                <MainPost>
+                    <Img fixed={data.file.childImageSharp.fixed} />
+                    <h2>Làm thế nào để  khám phá ra những cái mới</h2>
+                    <PostInfo>
+                        <div className='d-flex'>
+                            <div className='avatar' />
+                            Nguyễn Hùng
+                        </div>
+                        <div className='d-flex'>
+                            <Icon type='icon-calendar_today' />
+                            Jun, 05, 2019
+                        </div>
+                        <div className='d-flex'>
+                            <Icon type='icon-comment' />
+                            2
+                        </div>
+                        <div className='d-flex'>
+                            <Icon type='icon-remove_red_eyevisibility' />
+                            2000
+                        </div>
+                    </PostInfo>
+                    <p className='post-description'>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. In quasi praesentium dolore possimus eos dignissimos deleniti harum ad rerum itaque.
+                    </p>
+                    <div className='d-flex j-c'> 
+                        <Button danger type='primary' shape='round'>Continue Reading</Button>
+                    </div>
+                </MainPost>
+                <Sidebar className='w-40-pc'>
+                    <div className='side-bar-card'>
+                        <h1>tooi la awwwwwwwwwwwwwwwwwwwwwwwwi</h1>
+                    </div>
+                </Sidebar>
+            </MainWrapPost>
         </Layout>
     );
 };
@@ -136,6 +220,13 @@ export default Home;
 
 export const query = graphql`
   query {
+    file(relativePath: { eq: "assets/images/background.jpg" }) {
+        childImageSharp {
+            fixed(width: 750, height: 350, quality: 100) {
+                ...GatsbyImageSharpFixed
+            }
+        }
+    }
     site {
         siteMetadata {
           author

@@ -30,8 +30,18 @@ export const MenuHeader = styled.div`
     align-items: center;
 
     .menu-header-item {
-        font-size: 18px;
+        position: relative;
+        font-size: 17px;
         cursor: pointer;
         margin: 0 20px;
+        background-image: linear-gradient(to right,#00bec1 0%,#00bec1 100%);
+        background-size: 0px 4px;
+        background-repeat: no-repeat;
+        background-position: left 90%;
+        transition: all 300ms ease;
+        
+        &:hover {
+            background-size: 100% 4px;
+        }
     }
 `;

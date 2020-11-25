@@ -1,8 +1,8 @@
 ---
 title: "No way to learn"
 date: "2020-05-03"
-image: "http://estudiopatagon.com/themes/wordpress/breek/wp-content/uploads/2019/06/9294-op-600x450.jpg"
-imageBackground: "http://estudiopatagon.com/themes/wordpress/breek/wp-content/uploads/2019/06/9294-op-600x450.jpg"
+image: "https://cdn.pixabay.com/photo/2016/03/26/13/09/notebook-1280538_960_720.jpg"
+imageBackground: "https://cdn.pixabay.com/photo/2016/03/26/13/09/notebook-1280538_960_720.jpg"
 ---
 
 Welcome, it’s great to have you here.

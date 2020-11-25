@@ -21,6 +21,18 @@ html {
     }
 }
 
+.j-space-around {
+    justify-content: space-around;
+}
+
+.j-space-between {
+    justify-content: space-between;
+}
+
+.w-40-pc {
+    width: 35% !important;
+}
+
 .outline-none {
     outline: none;
 }
@@ -43,7 +55,6 @@ html {
 }
 
 .wrapper-card {
-    height: 500px;
     width: 100%;
 }
 

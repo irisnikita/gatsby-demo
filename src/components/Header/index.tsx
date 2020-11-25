@@ -2,6 +2,7 @@
 import React from 'react';
 import {useStaticQuery, graphql, Link} from 'gatsby';
 import Img from 'gatsby-image';
+import {Button} from 'vuisuper';
 
 // Styled
 import {WrapperHeader, MenuHeader} from './header.styled';
@@ -55,6 +56,7 @@ const Header: React.FC<HeaderProps> = (props) => {
                         {item.label}
                     </div>
                 ))}
+                <Button type='primary' size='large' shape='round' >Sign in</Button>
             </MenuHeader>
             {children}
         </WrapperHeader>

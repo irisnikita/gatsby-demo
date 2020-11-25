@@ -11,10 +11,10 @@ interface IBlogPost {
     data: any
 }
 
-const Post = styled.section`
+export const Post = styled.section`
 	background-color: #fff;
 	border-radius: ${props => props.theme.borderRadius};
-	padding: 30px;
+    padding: 30px;
 `;
 
 const BackgroundImage = styled.div`
@@ -25,7 +25,7 @@ const BackgroundImage = styled.div`
     background-size: cover;
 `;
 
-const Sidebar = styled.div`
+export const Sidebar = styled.div`
 	width: 30%;
 	display: flex;
 	flex-direction: column;
@@ -37,7 +37,7 @@ const Sidebar = styled.div`
 	}
 `;
 
-const WrapPost = styled.section`
+export const WrapPost = styled.section`
 	margin: 50px;
 	display: flex;
 	gap: 30px;

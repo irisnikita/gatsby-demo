@@ -1,8 +1,8 @@
 ---
 title: "How we choose to use the Moon"
 date: "2020-05-02"
-image: "http://estudiopatagon.com/themes/wordpress/breek/wp-content/uploads/2019/06/9294-op-600x450.jpg"
-imageBackground: "http://estudiopatagon.com/themes/wordpress/breek/wp-content/uploads/2019/06/9294-op-600x450.jpg"
+image: "https://cdn.pixabay.com/photo/2016/11/19/14/00/code-1839406_960_720.jpg"
+imageBackground: "https://cdn.pixabay.com/photo/2016/11/19/14/00/code-1839406_960_720.jpg"
 ---
 
 Welcome, it’s great to have you here.

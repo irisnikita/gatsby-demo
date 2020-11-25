@@ -1,8 +1,8 @@
 ---
 title: "Scientists found water on Mars surface"
 date: "2019-05-06"
-image: "http://estudiopatagon.com/themes/wordpress/breek/wp-content/uploads/2019/06/483797-PGTKAX-720-600x450.jpg"
-imageBackground: "http://estudiopatagon.com/themes/wordpress/breek/wp-content/uploads/2019/06/483797-PGTKAX-720-600x450.jpg"
+image: "https://cdn.pixabay.com/photo/2020/11/21/19/43/watch-5764987_960_720.jpg"
+imageBackground: "https://cdn.pixabay.com/photo/2020/11/21/19/43/watch-5764987_960_720.jpg"
 ---
 
 Welcome, it’s great to have you here.
