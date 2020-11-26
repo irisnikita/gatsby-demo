@@ -3,6 +3,7 @@ import React from 'react';
 import {useStaticQuery, graphql} from 'gatsby';
 import Img from 'gatsby-image';
 import {ThemeProvider} from 'styled-components';
+
 // Global theme
 import {globalTheme} from '../../themes/globalTheme';
 
@@ -17,6 +18,7 @@ interface LayoutProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 const Layout: React.FC<LayoutProps> = (props) => {
+    
     // Query gatsby
     const data = useStaticQuery(graphql`
      query {

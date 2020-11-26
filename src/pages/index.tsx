@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Slider from 'react-slick';
 import Img from 'gatsby-image';
 import {Button, Icon} from 'vuisuper';
+import firebase from 'gatsby-plugin-firebase';
+import {useCollectionData} from 'react-firebase-hooks/firestore';
 
 // Components
 import Layout from 'Components/Layout/index';
@@ -30,6 +32,8 @@ const WrapperIntroduce = styled.div`
     justify-content: center;
     width: 100%;
 `;
+
+const firestore = firebase.firestore();
 
 const MainPost = styled(Post)`
     text-align: center;
@@ -120,6 +124,11 @@ const Card = styled.div`
 `;
 
 const Home: React.FC<IHome> = (props) => {
+    // Firebase
+    const postRef = firestore.collection('posts');
+    const query = postRef.orderBy('cTime').limit(25);
+    const [firebasePosts] = useCollectionData(query, {idField: 'id'});
+    
     // Props
     const {data} = props;
 
@@ -177,6 +186,11 @@ const Home: React.FC<IHome> = (props) => {
                     </div>
                 </section>
             </WrapperIntroduce>
+            {
+                firebasePosts?.map((post, index) => (
+                    <div key={index}>{post.title}</div>
+                ))
+            }
             <MainWrapPost>
                 <MainPost>
                     <Img fixed={data.file.childImageSharp.fixed} />
@@ -203,7 +217,7 @@ const Home: React.FC<IHome> = (props) => {
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. In quasi praesentium dolore possimus eos dignissimos deleniti harum ad rerum itaque.
                     </p>
                     <div className='d-flex j-c'> 
-                        <Button danger type='primary' shape='round'>Continue Reading</Button>
+                        <Button size={'large'} type='primary' shape='round'>Continue Reading</Button>
                     </div>
                 </MainPost>
                 <Sidebar className='w-40-pc'>

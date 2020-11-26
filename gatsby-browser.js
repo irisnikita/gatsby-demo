@@ -2,6 +2,7 @@
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/functions';
+import 'firebase/database';
 
 // Import css files
 import './src/assets/style/global.scss';
