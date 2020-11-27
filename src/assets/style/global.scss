@@ -22,6 +22,7 @@ html {
 }
 
 .j-space-around {
+    // background-color: #ffffff79;
     justify-content: space-around;
 }
 
@@ -83,3 +84,24 @@ html {
     z-index: -1;
 }
 
+.text-hover-underline {
+    position: relative;
+    background-image: linear-gradient(to right,#00bec1 0%,#00bec1 100%);
+    background-size: 0px 4px;
+    background-repeat: no-repeat;
+    background-position: left 90%;
+    transition: all 300ms ease;
+    
+    &:hover {
+        background-size: 100% 4px;
+    }
+}
+
+.title-post {
+    font-weight: bold;
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 700;
+    text-rendering: optimizeLegibility;
+    font-size: 1.51572rem;
+    padding: 20px 0px 0px 0px;
+}

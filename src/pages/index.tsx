@@ -2,10 +2,8 @@
 import React, {useMemo} from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
-import Img from 'gatsby-image';
-import {Button, Icon} from 'vuisuper';
-import firebase from 'gatsby-plugin-firebase';
-import {useCollectionData} from 'react-firebase-hooks/firestore';
+import Img, {FixedObject, FluidObject} from 'gatsby-image';
+import {Button, Divider, Icon} from 'vuisuper';
 
 // Components
 import Layout from 'Components/Layout/index';
@@ -23,20 +21,35 @@ type TPost = {
     id: string | number,
     date: string,
     image: string ,
-    slug: string
+    slug: string,
+    featuredImage: FluidObject,
+    description?: string,
+    user: {
+        name: string,
+        avatar: FixedObject
+    }
 }
 
 // Styled
 const WrapperIntroduce = styled.div`
+    padding: 0px 10px;
     display: flex;
     justify-content: center;
     width: 100%;
 `;
 
-const firestore = firebase.firestore();
+const LeftMain = styled.section`
+    display: flex;
+    width: 70%;
+
+`;
 
 const MainPost = styled(Post)`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    width: 100%;
     
     h2 {
         margin: 10px !important;
@@ -53,6 +66,32 @@ const MainPost = styled(Post)`
 
         i {
             color: #08979c;
+        }
+    }
+
+    .img {
+        cursor: pointer;
+        position: relative;
+        width: 100%;
+        height: 350px;
+        border-radius: 10px;
+        box-shadow: 0 3px 12px -1px rgba(7,10,25,0.2), 0 22px 27px -20px rgba(7,10,25,0.2);
+
+        &:hover {
+            &:before {
+                background-color: rgba(0, 0, 0, 0.235);
+            }
+        }
+
+        &:before{
+            content: "";
+            position: absolute;
+            transition: all 200ms ease-in;
+            z-index: 2;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
     }
 `;
@@ -81,7 +120,7 @@ const PostInfo = styled.div`
 `;
 
 const Card = styled.div`
-    background: #000000;
+    /* background: #000000; */
     color: #fff;
     top: 0px;
     background-size: 450px;
@@ -109,7 +148,7 @@ const Card = styled.div`
         content: "";
         z-index: -1;
         border-radius: ${props => props.theme.borderRadius};
-        background-color: rgba(0, 0, 0, 0.214);
+        background-color: rgba(0, 0, 0, 0.393);
         width: 100%;
         height: 300px;
         position: absolute;
@@ -121,14 +160,18 @@ const Card = styled.div`
         margin: 10px 0px;
     }
 
+    .img-carousel {
+        overflow: hidden;
+        z-index: -2;
+        border-radius: 20px;
+        height: 100%;
+        width: 100%;
+        position: absolute !important;
+    }
+
 `;
 
 const Home: React.FC<IHome> = (props) => {
-    // Firebase
-    const postRef = firestore.collection('posts');
-    const query = postRef.orderBy('cTime').limit(25);
-    const [firebasePosts] = useCollectionData(query, {idField: 'id'});
-    
     // Props
     const {data} = props;
 
@@ -143,23 +186,48 @@ const Home: React.FC<IHome> = (props) => {
         slidesToScroll: 4
     };
 
-    const posts: Array<TPost> = useMemo(() => {
+    const carouselPosts: Array<TPost> = useMemo(() => {
         let formatPosts: Array<TPost> = [];
 
-        if (data.allMarkdownRemark && data.allMarkdownRemark.edges)
+        if (data.carousel && data.carousel.edges)
         {
-            formatPosts = data.allMarkdownRemark.edges.map((item) => ({
+            formatPosts = data.carousel.edges.map((item) => ({
                 id: item.node.id,
                 title: item.node.frontmatter.title,
                 date: item.node.frontmatter.date,
                 image: item.node.frontmatter.image,
-                slug: item.node.fields.slug
+                slug: item.node.fields.slug,
+                featuredImage: item.node.frontmatter.featuredImage.childImageSharp.fluid
             }));
         }
 
         return formatPosts;
 
-    }, [data.allMarkdownRemark.edges]);
+    }, [data.carousel.edges]);
+    
+    const posts: Array<TPost> = useMemo(() => {
+        let formatPosts: Array<TPost> = [];
+
+        if (data.posts && data.posts.edges)
+        {
+            formatPosts = data.posts.edges.map((item) => ({
+                id: item.node.id,
+                title: item.node.frontmatter.title,
+                date: item.node.frontmatter.date,
+                image: item.node.frontmatter.image,
+                featuredImage: item.node.frontmatter.featuredImage.childImageSharp.fluid,
+                slug: item.node.fields.slug,
+                description: item.node.excerpt,
+                user: {
+                    name: item.node.frontmatter.user.name,
+                    avatar: item.node.frontmatter.user.avatar.childImageSharp.fixed
+                }
+            }));
+        }
+
+        return formatPosts;
+
+    }, [data.posts.edges]);
       
     return (
         <Layout>
@@ -170,14 +238,15 @@ const Home: React.FC<IHome> = (props) => {
                         <Slider 
                             {...settings}
                         >
-                            {posts.map(post => {
+                            {carouselPosts.map(post => {
                                 return (
                                     <div key={post.id} className='outline-none'>
                                         <Link to={post.slug} >
-                                            <Card style={{backgroundImage: `url(${post.image})`}}>
+                                            <Card>
+                                                <Img fluid={post.featuredImage} className="img-carousel" />
                                                 <div>{post.date}</div>
                                                 <h2>{post.title}</h2>
-                                            </Card> 
+                                            </Card>
                                         </Link>
                                     </div>
                                 );
@@ -186,43 +255,52 @@ const Home: React.FC<IHome> = (props) => {
                     </div>
                 </section>
             </WrapperIntroduce>
-            {
-                firebasePosts?.map((post, index) => (
-                    <div key={index}>{post.title}</div>
-                ))
-            }
+           
             <MainWrapPost>
-                <MainPost>
-                    <Img fixed={data.file.childImageSharp.fixed} />
-                    <h2>Làm thế nào để  khám phá ra những cái mới</h2>
-                    <PostInfo>
-                        <div className='d-flex'>
-                            <div className='avatar' />
-                            Nguyễn Hùng
-                        </div>
-                        <div className='d-flex'>
-                            <Icon type='icon-calendar_today' />
-                            Jun, 05, 2019
-                        </div>
-                        <div className='d-flex'>
-                            <Icon type='icon-comment' />
+                <LeftMain>
+                    {posts.length ? posts.map(post => (
+                        <MainPost key={post.id}>
+                            <Img className='img' fluid={post.featuredImage} />
+                            <div className='title-post'>
+                                {post.title}
+                            </div>
+                            <PostInfo>
+                                <div className='d-flex'>
+                                    <Img className='avatar' fixed={post.user.avatar} />
+                                    {post.user?.name}
+                                </div>
+                                <div className='d-flex'>
+                                    <Icon type='icon-calendar_today' />
+                                    {post.date}
+                                </div>
+                                <div className='d-flex'>
+                                    <Icon type='icon-comment' />
                             2
-                        </div>
-                        <div className='d-flex'>
-                            <Icon type='icon-remove_red_eyevisibility' />
+                                </div>
+                                <div className='d-flex'>
+                                    <Icon type='icon-remove_red_eyevisibility' />
                             2000
-                        </div>
-                    </PostInfo>
-                    <p className='post-description'>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. In quasi praesentium dolore possimus eos dignissimos deleniti harum ad rerum itaque.
-                    </p>
-                    <div className='d-flex j-c'> 
-                        <Button size={'large'} type='primary' shape='round'>Continue Reading</Button>
-                    </div>
-                </MainPost>
+                                </div>
+                            </PostInfo>
+                            <p className='post-description'>
+                                {post.description}
+                            </p>
+                            <div className='d-flex j-c'>
+                                <Link to={post.slug} >
+                                    <Button size={'large'} type='primary' shape='round'>Continue Reading</Button>
+                                </Link> 
+                            </div>
+                        </MainPost>
+                    )) : null} 
+                </LeftMain>
                 <Sidebar className='w-40-pc'>
                     <div className='side-bar-card'>
-                        <h1>tooi la awwwwwwwwwwwwwwwwwwwwwwwwi</h1>
+                        <h2 style={{margin: 0}}>Popular Posts</h2>
+                        <Divider />
+                    </div>
+                    <div className='side-bar-card'>
+                        <h2 style={{margin: 0}}>Categories</h2>
+                        <Divider />
                     </div>
                 </Sidebar>
             </MainWrapPost>
@@ -236,9 +314,9 @@ export const query = graphql`
   query {
     file(relativePath: { eq: "assets/images/background.jpg" }) {
         childImageSharp {
-            fixed(width: 750, height: 350, quality: 100) {
-                ...GatsbyImageSharpFixed
-            }
+            fluid(quality: 100) {
+               ...GatsbyImageSharpFluid
+             }
         }
     }
     site {
@@ -248,21 +326,58 @@ export const query = graphql`
           title
         }
     }
-    allMarkdownRemark {
+    carousel: allMarkdownRemark(filter: {frontmatter: {type: {eq: "carousel"}}}) {
       edges {
         node {
           id
           frontmatter {
             title
             date(formatString: "LL")
-            image
+            featuredImage {
+                childImageSharp {
+                    fluid(quality: 100) {
+                    ...GatsbyImageSharpFluid
+                    }
+                }
+            }
           }
           fields {
             slug
           }
-          excerpt
         }
       }
+    }
+    posts: allMarkdownRemark(filter: {frontmatter: {type: {ne: "carousel"}}}) {
+    edges {
+      node {
+        id
+        frontmatter {
+            title
+            date(formatString: "LL")
+            featuredImage {
+                childImageSharp {
+                    fluid(quality: 100) {
+                    ...GatsbyImageSharpFluid
+                    }
+                }
+            }
+            user {
+                name
+                avatar {
+                    childImageSharp {
+                        fixed(width: 24, height: 24) {
+                        ...GatsbyImageSharpFixed
+                        }
+                }
+                }
+            }
+        }
+        fields {
+            slug
+        }
+        excerpt(pruneLength: 170)
+      }
+    }
     }
   }
 `;

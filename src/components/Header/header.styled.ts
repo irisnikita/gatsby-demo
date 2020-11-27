@@ -9,7 +9,7 @@ export const WrapperHeader = styled.div`
     align-items: center;
     justify-content: space-between;
     height: ${props => props.theme.size.header.height};
-    border-bottom: 3px solid #8c8c8c;
+    border-bottom: 3px solid #434343;
 
     h3 {
         margin: 0px ;
@@ -33,6 +33,7 @@ export const MenuHeader = styled.div`
         position: relative;
         font-size: 17px;
         cursor: pointer;
+        font-weight: 550;
         margin: 0 20px;
         background-image: linear-gradient(to right,#00bec1 0%,#00bec1 100%);
         background-size: 0px 4px;

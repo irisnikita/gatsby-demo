@@ -8,26 +8,27 @@ module.exports = {
         author: 'truongvi1999'
     },
     plugins: [
-        'gatsby-transformer-remark',
+        {
+            resolve: 'gatsby-transformer-remark',
+            options: {
+                plugins: [
+                    {
+                        resolve: 'gatsby-remark-images',
+                        options: {
+                            // It's important to specify the maxWidth (in pixels) of
+                            // the content container as this plugin uses this as the
+                            // base for generating different widths of each image.
+                            maxWidth: 590
+                        }
+                    }
+                ]
+            }
+        },
         'gatsby-plugin-react-helmet',
         'gatsby-plugin-sass',
         'gatsby-plugin-styled-components',
         'gatsby-transformer-sharp', 
         'gatsby-plugin-sharp',
-        {
-            resolve: 'gatsby-plugin-firebase',
-            options: {
-                credentials: {
-                    apiKey: 'AIzaSyBDMnjtusrK5x_kaq7F4TJjf37Wy56MqCs',
-                    authDomain: 'vuitech.firebaseapp.com',
-                    databaseURL: 'https://vuitech.firebaseio.com',
-                    projectId: 'vuitech',
-                    storageBucket: 'vuitech.appspot.com',
-                    messagingSenderId: '35143621485',
-                    appId: '1:35143621485:web:50e9c3ec21a20d56b95864'
-                }
-            }
-        },
         {
             resolve: 'gatsby-plugin-manifest',
             options: {
