@@ -3,6 +3,10 @@ title: "React - Vòng đời của một Component có gì hay"
 date: "2020-05-02"
 type: "carousel"
 featuredImage: ../../assets/images/posts/carousel/reactjs.png
+user: {
+    name: Trường Vĩ,
+    avatar: ../../assets/images/avatar-me.jpeg
+}
 ---
 <article class="post-content">
 

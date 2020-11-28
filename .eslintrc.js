@@ -7,11 +7,13 @@ module.exports = {
         'jest': true
     },
     'plugins': [
-        'react'
+        'react',
+        'css-modules'
     ],
     'extends': [
         'eslint:recommended',
         'plugin:react/recommended',
+        'plugin:css-modules/recommended',
         'plugin:@typescript-eslint/recommended'
     ],
     'parser': '@typescript-eslint/parser',

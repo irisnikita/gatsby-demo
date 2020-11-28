@@ -8,6 +8,11 @@ import {Button, Divider, Icon} from 'vuisuper';
 // Components
 import Layout from 'Components/Layout/index';
 import {Post, WrapPost, Sidebar} from 'Src/templates/blog-post';
+import PostCardCircle from 'Components/Post/PostCardCircle';
+import Categories from 'Components/Post/Categories';
+
+// Styled Components
+import {PostInfo} from 'StyledComponents/Post/index';
 
 import {graphql, Link} from 'gatsby';
 import SEO from 'Components/Seo';
@@ -23,6 +28,7 @@ type TPost = {
     image: string ,
     slug: string,
     featuredImage: FluidObject,
+    featuredImageFixed: FixedObject,
     description?: string,
     user: {
         name: string,
@@ -39,9 +45,10 @@ const WrapperIntroduce = styled.div`
 `;
 
 const LeftMain = styled.section`
-    display: flex;
     width: 70%;
-
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 `;
 
 const MainPost = styled(Post)`
@@ -57,16 +64,6 @@ const MainPost = styled(Post)`
 
     .post-description {
         padding: 0px 30px;
-    }
-
-    .d-flex {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-
-        i {
-            color: #08979c;
-        }
     }
 
     .img {
@@ -100,23 +97,6 @@ const MainWrapPost = styled(WrapPost)`
     margin-top: 15px;
     justify-content: space-between;
     flex-wrap: nowrap wrap;
-`;
-
-const PostInfo = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    font-size: 14px;
-    margin-bottom: 10px;
-
-    .avatar {
-        width: 24px;
-        height: 24px;
-        background-color: #36cfc9;
-        border-radius: 50%;
-    }
-
 `;
 
 const Card = styled.div`
@@ -207,7 +187,7 @@ const Home: React.FC<IHome> = (props) => {
     
     const posts: Array<TPost> = useMemo(() => {
         let formatPosts: Array<TPost> = [];
-
+        
         if (data.posts && data.posts.edges)
         {
             formatPosts = data.posts.edges.map((item) => ({
@@ -218,6 +198,7 @@ const Home: React.FC<IHome> = (props) => {
                 featuredImage: item.node.frontmatter.featuredImage.childImageSharp.fluid,
                 slug: item.node.fields.slug,
                 description: item.node.excerpt,
+                featuredImageFixed: item.node.frontmatter.featuredImage.childImageSharp.fixed,
                 user: {
                     name: item.node.frontmatter.user.name,
                     avatar: item.node.frontmatter.user.avatar.childImageSharp.fixed
@@ -228,7 +209,7 @@ const Home: React.FC<IHome> = (props) => {
         return formatPosts;
 
     }, [data.posts.edges]);
-      
+    
     return (
         <Layout>
             <SEO title={site.siteMetadata.title} description={site.siteMetadata.description} />
@@ -297,10 +278,22 @@ const Home: React.FC<IHome> = (props) => {
                     <div className='side-bar-card'>
                         <h2 style={{margin: 0}}>Popular Posts</h2>
                         <Divider />
+                        {posts.length && posts.map(post => (
+                            <PostCardCircle 
+                                key={post.id} 
+                                postInfo={{
+                                    title: post.title,
+                                    date: post.date,
+                                    image: post.featuredImageFixed,
+                                    slug: post.slug
+                                }} 
+                            />
+                        ))}
                     </div>
                     <div className='side-bar-card'>
                         <h2 style={{margin: 0}}>Categories</h2>
                         <Divider />
+                        <Categories />
                     </div>
                 </Sidebar>
             </MainWrapPost>
@@ -359,13 +352,16 @@ export const query = graphql`
                     fluid(quality: 100) {
                     ...GatsbyImageSharpFluid
                     }
+                    fixed(width: 80, height: 80, quality: 100) {
+                        ...GatsbyImageSharpFixed
+                    }
                 }
             }
             user {
                 name
                 avatar {
                     childImageSharp {
-                        fixed(width: 24, height: 24) {
+                        fixed(width: 30, height: 30, quality: 100) {
                         ...GatsbyImageSharpFixed
                         }
                 }

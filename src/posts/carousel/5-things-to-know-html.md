@@ -5,6 +5,10 @@ image: "https://cdn.pixabay.com/photo/2016/11/19/14/00/code-1839406_960_720.jpg"
 imageBackground: "https://cdn.pixabay.com/photo/2016/11/19/14/00/code-1839406_960_720.jpg"
 type: "carousel"
 featuredImage: ../../assets/images/posts/carousel/5-things-to-know-html.jpeg
+user: {
+    name: Trường Vĩ,
+    avatar: ../../assets/images/avatar-me.jpeg
+}
 ---
 <section class="post-full-content css-1apapbg e14ijd7g0">
 

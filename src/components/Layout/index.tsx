@@ -3,6 +3,9 @@ import React from 'react';
 import {useStaticQuery, graphql} from 'gatsby';
 import Img from 'gatsby-image';
 import {ThemeProvider} from 'styled-components';
+import {defineCustomElements as deckDeckGoHighlightElement} from '@deckdeckgo/highlight-code/dist/loader';
+
+deckDeckGoHighlightElement();
 
 // Global theme
 import {globalTheme} from '../../themes/globalTheme';

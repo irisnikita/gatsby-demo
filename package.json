@@ -14,6 +14,7 @@
   "author": "truong-vi",
   "license": "ISC",
   "dependencies": {
+    "@deckdeckgo/highlight-code": "^2.2.1",
     "babel-plugin-styled-components": "^1.11.1",
     "firebase": "^8.1.1",
     "gatsby": "^2.25.3",
@@ -29,9 +30,10 @@
     "gatsby-plugin-styled-components": "^3.3.14",
     "gatsby-plugin-typescript": "^2.5.0",
     "gatsby-plugin-typography": "^2.5.13",
+    "gatsby-remark-highlight-code": "^2.1.0",
     "gatsby-remark-images": "^3.6.0",
     "gatsby-source-filesystem": "^2.4.2",
-    "gatsby-transformer-remark": "^2.9.2",
+    "gatsby-transformer-remark": "^2.11.1",
     "gatsby-transformer-sharp": "^2.5.21",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -56,6 +58,7 @@
     "@typescript-eslint/eslint-plugin": "^4.7.0",
     "@typescript-eslint/parser": "^4.7.0",
     "eslint": "^7.13.0",
+    "eslint-plugin-css-modules": "^2.11.0",
     "eslint-plugin-react": "^7.21.5",
     "sass": "^1.28.0",
     "typescript": "^4.0.5"

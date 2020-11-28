@@ -38,6 +38,9 @@
             "Pages/*": [
                 "src/pages/*"
             ],
+            "StyledComponents/*": [
+                "src/styledComponents/*"
+            ],
         },
     },
     "include": [

@@ -7,7 +7,7 @@ type: "web-development"
 featuredImage: ./../../assets/images/posts/web-development/js-dom-7.png
 user: {
     name: Trường Vĩ,
-    avatar: ../../assets/images/avatar-me.jpg
+    avatar: ../../assets/images/avatar-me.jpeg
 }
 ---
 

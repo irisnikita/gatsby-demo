@@ -20,6 +20,12 @@ module.exports = {
                             // base for generating different widths of each image.
                             maxWidth: 590
                         }
+                    },
+                    {
+                        resolve: 'gatsby-remark-highlight-code',
+                        options: {
+                            theme: 'one-dark'
+                        }
                     }
                 ]
             }
@@ -49,7 +55,8 @@ module.exports = {
                 Src: path.join(__dirname, 'src'),
                 Assets: path.join(__dirname, 'src/assets'),
                 Pages: path.join(__dirname, 'src/pages'),
-                Components: path.join(__dirname, 'src/components')
+                Components: path.join(__dirname, 'src/components'),
+                StyledComponents: path.join(__dirname, 'src/styledComponents')
             }
         },
         {
